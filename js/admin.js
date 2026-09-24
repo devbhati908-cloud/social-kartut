@@ -4,8 +4,9 @@ const page = document.body.classList.contains('admin-body') && document.querySel
 const message = (element, text = '', type = '') => { if (!element) return; element.textContent = text; element.className = `form-message ${type}`; };
 const setBusy = (button, busy) => { button.disabled = busy; button.classList.toggle('is-busy', busy); };
 const prettyError = (error) => error?.message?.toLowerCase().includes('invalid login credentials') ? 'The email or password is incorrect.' : 'Something went wrong. Please try again.';
-const loginPath = '/admin/login/';
-const dashboardPath = '/admin/';
+const baseUrl = import.meta.env.BASE_URL;
+const loginPath = `${baseUrl}admin/login/`;
+const dashboardPath = `${baseUrl}admin/`;
 
 const getAdminSession = async () => {
   const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
